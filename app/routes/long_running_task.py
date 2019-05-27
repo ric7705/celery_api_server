@@ -14,7 +14,7 @@ def status():
     task_list = get_tasks()
     for task in task_list:
         celery_task = celery.AsyncResult(task['task_id'])
-        task['status'] = not celery_task.status
+        task['status'] = celery_task.status
     return jsonify(task_list)
 
 
@@ -45,8 +45,8 @@ def stop():
         if task['key'] == key:
             task_id = task['task_id']
             celery.control.revoke(task_id, terminate=True)
-
-            del task_list[i]
+            task_list[i]['status'] = "REVOKE"
+            # del task_list[i]
             set_task(task_list)
 
             return jsonify({"status": "success"})
