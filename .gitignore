@@ -1,0 +1,7 @@
+htmlcov/
+.idea/
+.coverage
+__pycache__/
+*.pyc
+app/tasks.temp
+logging.txt
