@@ -23,7 +23,7 @@ start celery worker (in task_server directory)
 
 CPU bound:
 ```
-celery worker -A app.celery --concurrency 4 --loglevel=info
+celery worker -A app.celery --autoscale=10,2 --loglevel=info
 ```
 
 IO bound:
